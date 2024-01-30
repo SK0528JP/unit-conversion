@@ -66,12 +66,14 @@
 <body>
 
     <div id="converter">
-        <label for="conversionType">換算単位:</label>
+        <label for="conversionType">変換種類:</label>
         <select id="conversionType" onchange="changeConversionType()">
             <option value="kmToMeters">キロメートル → メートル</option>
             <option value="metersToKm">メートル → キロメートル</option>
-            <option value="kmToNautical">キロメートル → 海里</option>
+            <option value="kmToFeet">キロメートル → フィート</option>
+            <option value="feetToKm">フィート → キロメートル</option>
             <option value="nauticalToKm">海里 → キロメートル</option>
+            <option value="kmToNautical">キロメートル → 海里</option>
             <option value="kmToMiles">キロメートル → マイル</option>
             <option value="milesToKm">マイル → キロメートル</option>
             <option value="mToMeters">マイル → メートル</option>
@@ -80,13 +82,18 @@
             <option value="nauticalToMeters">海里 → メートル</option>
             <option value="milesToNautical">マイル → 海里</option>
             <option value="nauticalToMiles">海里 → マイル</option>
-            <option value="nauticalToKm">海里 → キロメートル</option>
-            <option value="kmToNautical">キロメートル → 海里</option>
-            <option value="milesToMeters">マイル → メートル</option>
+            <option value="nauticalToFeet">海里 → フィート</option>
+            <option value="feetToNautical">フィート → 海里</option>
+            <option value="feetToMeters">フィート → メートル</option>
+            <option value="metersToFeet">メートル → フィート</option>
+            <option value="cmToMeters">センチメートル → メートル</option>
+            <option value="metersToCm">メートル → センチメートル</option>
+            <option value="mmToMeters">ミリメートル → メートル</option>
+            <option value="metersToMm">メートル → ミリメートル</option>
         </select>
 
-        <label for="inputValue">数値:</label>
-        <input type="number" id="inputValue" placeholder="換算するための数値を入力してください" />
+        <label for="inputValue">距離:</label>
+        <input type="number" id="inputValue" placeholder="距離を入力してください" />
 
         <button onclick="convert()">変換</button>
         
@@ -96,22 +103,49 @@
     <div id="explanation">
         <h2>単位換算について</h2>
         <p>
-            このシステムでは、キロメートル（Kilometer）、メートル（Meter）、海里（Nautical Mile）、マイル（Mile）の間で距離の単位換算が行えます。
+            このシステムでは、キロメートル（Kilometer）、メートル（Meter）、フィート（Feet）、海里（Nautical Mile）、マイル（Mile）、センチメートル（Centimeter）、ミリメートル（Millimeter）の間で距離の単位換算が行えます。
         </p>
 
         <h2>距離の換算</h2>
         <p>
             - 1 キロメートル ≈ 1,000 メートル <br>
+            - 1 キロメートル ≈ 3,280.84 フィート <br>
             - 1 キロメートル ≈ 0.53996 海里 <br>
             - 1 キロメートル ≈ 0.62137 マイル <br>
+            - 1 キロメートル ≈ 100,000 センチメートル <br>
+            - 1 キロメートル ≈ 1,000,000 ミリメートル <br>
+            - 1 メートル ≈ 3.28084 フィート <br>
             - 1 メートル ≈ 0.00054 海里 <br>
             - 1 メートル ≈ 0.00062 マイル <br>
+            - 1 メートル ≈ 100 センチメートル <br>
+            - 1 メートル ≈ 1,000 ミリメートル <br>
+            - 1 フィート ≈ 0.00031 海里 <br>
+            - 1 フィート ≈ 0.00019 マイル <br>
+            - 1 フィート ≈ 30.48 センチメートル <br>
+            - 1 フィート ≈ 304.8 ミリメートル <br>
             - 1 海里 ≈ 1.852 キロメートル <br>
+            - 1 海里 ≈ 6,076.12 フィート <br>
             - 1 海里 ≈ 1,852 メートル <br>
             - 1 海里 ≈ 1.15078 マイル <br>
+            - 1 海里 ≈ 185,200 センチメートル <br>
+            - 1 海里 ≈ 1,852,000 ミリメートル <br>
             - 1 マイル ≈ 1.60934 キロメートル <br>
+            - 1 マイル ≈ 5,280 フィート <br>
             - 1 マイル ≈ 1,609.34 メートル <br>
-            - 1 マイル ≈ 0.86898 海里 <br>
+            - 1 マイル ≈ 160,934 センチメートル <br>
+            - 1 マイル ≈ 1,609,340 ミリメートル <br>
+            - 1 センチメートル ≈ 0.00001 キロメートル <br>
+            - 1 センチメートル ≈ 0.0328 フィート <br>
+            - 1 センチメートル ≈ 0.00054 海里 <br>
+            - 1 センチメートル ≈ 0.00062 マイル <br>
+            - 1 センチメートル ≈ 0.01 メートル <br>
+            - 1 センチメートル ≈ 10 ミリメートル <br>
+            - 1 ミリメートル ≈ 0.000001 キロメートル <br>
+            - 1 ミリメートル ≈ 0.00328 フィート <br>
+            - 1 ミリメートル ≈ 0.00000054 海里 <br>
+            - 1 ミリメートル ≈ 0.00000062 マイル <br>
+            - 1 ミリメートル ≈ 0.001 メートル <br>
+            - 1 ミリメートル ≈ 0.1 センチメートル <br>
         </p>
     </div>
 
@@ -130,13 +164,21 @@
                     label.textContent = "メートル:";
                     placeholder = "距離（メートル）";
                     break;
-                case "kmToNautical":
+                case "kmToFeet":
                     label.textContent = "キロメートル:";
                     placeholder = "距離（キロメートル）";
+                    break;
+                case "feetToKm":
+                    label.textContent = "フィート:";
+                    placeholder = "距離（フィート）";
                     break;
                 case "nauticalToKm":
                     label.textContent = "海里:";
                     placeholder = "距離（海里）";
+                    break;
+                case "kmToNautical":
+                    label.textContent = "キロメートル:";
+                    placeholder = "距離（キロメートル）";
                     break;
                 case "kmToMiles":
                     label.textContent = "キロメートル:";
@@ -170,17 +212,37 @@
                     label.textContent = "海里:";
                     placeholder = "距離（海里）";
                     break;
-                case "nauticalToKm":
+                case "nauticalToFeet":
                     label.textContent = "海里:";
                     placeholder = "距離（海里）";
                     break;
-                case "kmToNautical":
-                    label.textContent = "キロメートル:";
-                    placeholder = "距離（キロメートル）";
+                case "feetToNautical":
+                    label.textContent = "フィート:";
+                    placeholder = "距離（フィート）";
                     break;
-                case "milesToMeters":
-                    label.textContent = "マイル:";
-                    placeholder = "距離（マイル）";
+                case "feetToMeters":
+                    label.textContent = "フィート:";
+                    placeholder = "距離（フィート）";
+                    break;
+                case "metersToFeet":
+                    label.textContent = "メートル:";
+                    placeholder = "距離（メートル）";
+                    break;
+                case "cmToMeters":
+                    label.textContent = "センチメートル:";
+                    placeholder = "距離（センチメートル）";
+                    break;
+                case "metersToCm":
+                    label.textContent = "メートル:";
+                    placeholder = "距離（メートル）";
+                    break;
+                case "mmToMeters":
+                    label.textContent = "ミリメートル:";
+                    placeholder = "距離（ミリメートル）";
+                    break;
+                case "metersToMm":
+                    label.textContent = "メートル:";
+                    placeholder = "距離（メートル）";
                     break;
             }
 
@@ -197,63 +259,91 @@
             switch (conversionType) {
                 case "kmToMeters":
                     conversionFactor = 1000;
-                    result.textContent = inputValue + ' キロメートルは約 ' + (inputValue * conversionFactor).toFixed(2) + ' メートルです。';
+                    result.textContent = inputValue + ' キロメートルは約 ' + (inputValue * conversionFactor) + ' メートルです。';
                     break;
                 case "metersToKm":
-                    conversionFactor = 1000;
-                    result.textContent = inputValue + ' メートルは約 ' + (inputValue / conversionFactor).toFixed(2) + ' キロメートルです。';
+                    conversionFactor = 0.001;
+                    result.textContent = inputValue + ' メートルは約 ' + (inputValue * conversionFactor) + ' キロメートルです。';
+                    break;
+                case "kmToFeet":
+                    conversionFactor = 3280.84;
+                    result.textContent = inputValue + ' キロメートルは約 ' + (inputValue * conversionFactor) + ' フィートです。';
+                    break;
+                case "feetToKm":
+                    conversionFactor = 0.0003048;
+                    result.textContent = inputValue + ' フィートは約 ' + (inputValue * conversionFactor) + ' キロメートルです。';
+                    break;
+                case "nauticalToKm":
+                    conversionFactor = 1.852;
+                    result.textContent = inputValue + ' 海里は約 ' + (inputValue * conversionFactor) + ' キロメートルです。';
                     break;
                 case "kmToNautical":
                     conversionFactor = 0.53996;
-                    result.textContent = inputValue + ' キロメートルは約 ' + (inputValue * conversionFactor).toFixed(2) + ' 海里です。';
-                    break;
-                case "nauticalToKm":
-                    conversionFactor = 1.852;
-                    result.textContent = inputValue + ' 海里は約 ' + (inputValue * conversionFactor).toFixed(2) + ' キロメートルです。';
+                    result.textContent = inputValue + ' キロメートルは約 ' + (inputValue * conversionFactor) + ' 海里です。';
                     break;
                 case "kmToMiles":
                     conversionFactor = 0.62137;
-                    result.textContent = inputValue + ' キロメートルは約 ' + (inputValue * conversionFactor).toFixed(2) + ' マイルです。';
+                    result.textContent = inputValue + ' キロメートルは約 ' + (inputValue * conversionFactor) + ' マイルです。';
                     break;
                 case "milesToKm":
                     conversionFactor = 1.60934;
-                    result.textContent = inputValue + ' マイルは約 ' + (inputValue * conversionFactor).toFixed(2) + ' キロメートルです。';
+                    result.textContent = inputValue + ' マイルは約 ' + (inputValue * conversionFactor) + ' キロメートルです。';
                     break;
                 case "mToMeters":
                     conversionFactor = 1609.34;
-                    result.textContent = inputValue + ' マイルは約 ' + (inputValue * conversionFactor).toFixed(2) + ' メートルです。';
+                    result.textContent = inputValue + ' マイルは約 ' + (inputValue * conversionFactor) + ' メートルです。';
                     break;
                 case "metersToMiles":
-                    conversionFactor = 0.00062;
-                    result.textContent = inputValue + ' メートルは約 ' + (inputValue * conversionFactor).toFixed(2) + ' マイルです。';
+                    conversionFactor = 0.00062137;
+                    result.textContent = inputValue + ' メートルは約 ' + (inputValue * conversionFactor) + ' マイルです。';
                     break;
                 case "mToNautical":
-                    conversionFactor = 0.00054;
-                    result.textContent = inputValue + ' メートルは約 ' + (inputValue * conversionFactor).toFixed(2) + ' 海里です。';
+                    conversionFactor = 0.00053996;
+                    result.textContent = inputValue + ' マイルは約 ' + (inputValue * conversionFactor) + ' 海里です。';
                     break;
                 case "nauticalToMeters":
                     conversionFactor = 1852;
-                    result.textContent = inputValue + ' 海里は約 ' + (inputValue * conversionFactor).toFixed(2) + ' メートルです。';
+                    result.textContent = inputValue + ' 海里は約 ' + (inputValue * conversionFactor) + ' メートルです。';
                     break;
                 case "milesToNautical":
-                    conversionFactor = 1.15078;
-                    result.textContent = inputValue + ' マイルは約 ' + (inputValue * conversionFactor).toFixed(2) + ' 海里です。';
+                    conversionFactor = 0.86898;
+                    result.textContent = inputValue + ' マイルは約 ' + (inputValue * conversionFactor) + ' 海里です。';
                     break;
                 case "nauticalToMiles":
                     conversionFactor = 1.15078;
-                    result.textContent = inputValue + ' 海里は約 ' + (inputValue / conversionFactor).toFixed(2) + ' マイルです。';
+                    result.textContent = inputValue + ' 海里は約 ' + (inputValue * conversionFactor) + ' マイルです。';
                     break;
-                case "nauticalToKm":
-                    conversionFactor = 1.852;
-                    result.textContent = inputValue + ' 海里は約 ' + (inputValue * conversionFactor).toFixed(2) + ' キロメートルです。';
+                case "nauticalToFeet":
+                    conversionFactor = 6076.12;
+                    result.textContent = inputValue + ' 海里は約 ' + (inputValue * conversionFactor) + ' フィートです。';
                     break;
-                case "kmToNautical":
-                    conversionFactor = 1.852;
-                    result.textContent = inputValue + ' キロメートルは約 ' + (inputValue / conversionFactor).toFixed(2) + ' 海里です。';
+                case "feetToNautical":
+                    conversionFactor = 0.00016458;
+                    result.textContent = inputValue + ' フィートは約 ' + (inputValue * conversionFactor) + ' 海里です。';
                     break;
-                case "milesToMeters":
-                    conversionFactor = 1609.34;
-                    result.textContent = inputValue + ' マイルは約 ' + (inputValue * conversionFactor).toFixed(2) + ' メートルです。';
+                case "feetToMeters":
+                    conversionFactor = 0.3048;
+                    result.textContent = inputValue + ' フィートは約 ' + (inputValue * conversionFactor) + ' メートルです。';
+                    break;
+                case "metersToFeet":
+                    conversionFactor = 3.28084;
+                    result.textContent = inputValue + ' メートルは約 ' + (inputValue * conversionFactor) + ' フィートです。';
+                    break;
+                case "cmToMeters":
+                    conversionFactor = 0.01;
+                    result.textContent = inputValue + ' センチメートルは約 ' + (inputValue * conversionFactor) + ' メートルです。';
+                    break;
+                case "metersToCm":
+                    conversionFactor = 100;
+                    result.textContent = inputValue + ' メートルは約 ' + (inputValue * conversionFactor) + ' センチメートルです。';
+                    break;
+                case "mmToMeters":
+                    conversionFactor = 0.001;
+                    result.textContent = inputValue + ' ミリメートルは約 ' + (inputValue * conversionFactor) + ' メートルです。';
+                    break;
+                case "metersToMm":
+                    conversionFactor = 1000;
+                    result.textContent = inputValue + ' メートルは約 ' + (inputValue * conversionFactor) + ' ミリメートルです。';
                     break;
             }
         }
